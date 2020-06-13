@@ -17,19 +17,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "12.x"
+  }
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.7.3",
     "nodemon": "^2.0.4",
     "twilio": "^3.45.0"
-  },
-  {
-  "name": "groupmatebackend",
-  "description": "groupmatebackend",
-  "version": "1.0.0",
-  "engines": {
-    "node": "12.x"
   }
-}
 }
