@@ -81,12 +81,11 @@ UserRouter.get('/',(req,res)=>{
 UserRouter.post("/sendsms/", (req, res) => {
     client.messages
       .create({
-        body: "Hello from Node",
+        body: req.body.content,
         to: "+61469 829 385", // Text this number
         from: "+12029339131", // From a valid Twilio number
       })
       .then((message) => console.log("message sent", message.sid));
-    // console.log("in else", req.body.phoneNumberreceiver, req.body.phoneNumbersender);
     res.status(200).json({ status:'Success' });
   });
 
