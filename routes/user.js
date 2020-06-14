@@ -4,7 +4,7 @@ const User = require('../model/User');
 var twilio = require("twilio");
 
 var accountSid = "AC0572356065972ecfbe6a244ca543fca1"; // Your Account SID from www.twilio.com/console
-var authToken = "cded4ffc45b4d13570a10968d0410e7d"; // Your Auth Token from www.twilio.com/console
+var authToken = "b6d02c08ebd96c0341d453b2cff33f1f"; // Your Auth Token from www.twilio.com/console
 
 var twilio = require("twilio");
 var client = new twilio(accountSid, authToken);
@@ -64,7 +64,6 @@ var client = new twilio(accountSid, authToken);
  */
 //read
 UserRouter.get('/',(req,res)=>{
-    console.log("received in get")
     User.find({},(err,response)=>{
         if(err)
             res.status(500).json({message:{
@@ -81,16 +80,16 @@ UserRouter.get('/',(req,res)=>{
 UserRouter.post("/sendsms/", (req, res) => {
     client.messages
       .create({
-        body: req.body.content,
-        to: "+61469 829 385", // Text this number
+        body: `${req.body.content}`,
+        to: "+61469829385", // Text this number
         from: "+12029339131", // From a valid Twilio number
       })
-      .then((message) => console.log("message sent", message.sid));
+      .then((message) => console.log("message sent", message.sid))
+      .catch(err=>console.log(err));
     res.status(200).json({ status:'Success' });
   });
 
 UserRouter.post('/userbyemail/',(req,res)=>{
-    console.log("received in get by email",req.body)
     User.findOne({email:req.body.email},(err,response)=>{
         if(err)
             res.status(500).json({message:{
@@ -98,7 +97,6 @@ UserRouter.post('/userbyemail/',(req,res)=>{
                 msgError : true
             }});
         else{
-            console.log("in else", response)
             res.status(200).json({response});
         }
     });
@@ -118,11 +116,7 @@ UserRouter.get("/students", (req, res) => {
 
 //create
 UserRouter.post('/signup',(req,res)=>{
-    
-    console.log("signup called");
-
     const userObj = new User(req.body);
-    console.log("userObject==",userObj)
     userObj.save((err,document)=>{
         if(err)
             res.status(500).json({message:{
