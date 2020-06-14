@@ -4,12 +4,13 @@ const bodyParser = require('body-parser');
 var cors = require('cors')
 const app = express();
 app.use(bodyParser.json());
-
-//routes
+var swaggerUi = require('swagger-ui-express');
+var swaggerDocument = require('./swagger.json');
 const user = require('./routes/user');
-// app.use('/employee',employee);
 app.use(cors());
 app.use('/user',user);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
@@ -17,7 +18,6 @@ if(process.env.NODE_ENV === 'production'){
         res.sendFile(path.join(__dirname,'client','build','index.html'));
     });
 }
-
 
 const uri = 'mongodb+srv://sukhman:Demo@123@cluster0-01umk.mongodb.net/test?retryWrites=true&w=majority';
 mongoose.connect(uri,
