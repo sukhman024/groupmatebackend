@@ -43,22 +43,6 @@
         }
       }
     },
-    "/user/students": {
-      "get": {
-        "tags": [
-          "Students"
-        ],
-        "summary": "Get all students",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Users"
-            }
-          }
-        }
-      }
-    },
     "/user/sendsms": {
       "post": {
         "tags": [
