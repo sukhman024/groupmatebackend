@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/ISC"
     }
   },
-  "host": "groupmateproject.herokuapp.com",
+  "host": "localhost:5000",
   "basePath": "/",
   "tags": [
     {
